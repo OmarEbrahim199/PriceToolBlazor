@@ -1,0 +1,93 @@
+.navbar-toggler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row {
+   
+}
+
+.navbar-brand {
+    font-size: 1.1rem;
+}
+.navbar-text{
+    gap:10rem;
+}
+
+
+.oi {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+.nav-item {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+    .nav-item:first-of-type {
+        padding-top: 1rem;
+    }
+
+    .nav-item:last-of-type {
+        padding-bottom: 1rem;
+    }
+
+    .nav-item ::deep a {
+        color: #d7d7d7;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+
+        .nav-item ::deep a:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+/* Media query to control menu visibility */
+@media (max-width: 641px) {
+    .menu {
+        display: block; /* Show the menu when the screen is small */
+    }
+
+        .menu li {
+            display: block;
+            margin-bottom: 10px;
+        }
+}
+
+
+/*NEW ADDED*/
+.n-list {
+    display: flex;
+    margin-right: 0;
+}
+
+.nav-link:hover {
+    color: var(--orange);
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 750px) {
+    .navbar-text {
+        display: none;
+    }
+}
+
+
+
+@media screen and (max-width: 488px) {
+    .DropDown-list {
+        display: none;
+    }
+}
+
+
+    

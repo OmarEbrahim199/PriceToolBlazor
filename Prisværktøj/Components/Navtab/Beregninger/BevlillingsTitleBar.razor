@@ -1,0 +1,42 @@
+﻿@using Pricetool.UI.Buttons
+    <style >
+
+    .custom-outline-primary i.bi {
+        font-size: 1.5rem; /* Adjust this value as needed */
+   
+    }
+</style>
+
+<div class="d-flex justify-content-between align-items-center">
+    <!-- Title -->
+    <div class="h3 mb-0">Bevillings Overblik</div>
+
+    <!-- Buttons -->
+    <div class="d-flex align-items-center">
+       
+        <IconButton Text="ANMOD OM BEVILLING"  OnClick="@YourFirstButtonClickMethod" />
+        <IconButton Text="GEM"  OnClick="@YourFirstButtonClickMethod" />
+        <button class="custom-outline-primary" @onclick="@YourThirdButtonClickMethod">
+            <i class="bi bi-three-dots-vertical"></i>
+        </button>
+
+    </div>
+</div>
+
+@code {
+    private void YourFirstButtonClickMethod()
+    {
+        // Do something here
+    }
+
+private void YourSecondButtonClickMethod()
+    {
+        // Do something here
+    }
+
+private void YourThirdButtonClickMethod()
+    {
+        // Do something here
+    }
+}
+

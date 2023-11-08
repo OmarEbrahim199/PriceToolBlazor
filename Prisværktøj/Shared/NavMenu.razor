@@ -1,0 +1,130 @@
+﻿@using Pricetool.Components.Information
+@using Pricetool.Models;
+@using Pricetool.UI.Buttons
+@inject TooltipService tooltipService
+@inject Models.DialogServices DialogService
+@using Radzen.Blazor
+
+
+<!-- height: 3.5rem;
+    background-color: rgba(7, 9, 74, 1);-->
+<div class="footer-height ps-3 navbar navbar-dark" style="">
+    <div class="nav justify-content-start ">
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-text">
+            <a class="navbar-brand" style="margin-left:1rem;" href="">Prisværktøj Retail Erhverv</a>
+        </div>
+   
+    </div>
+
+    <div class="nav justify-content-end">
+        <div class="n-list">
+
+            <div class="DropDown-list">
+
+
+                <IconDropDown Text="INFORMATIONER" Icon="bi bi-arrow-down" OnClick="@ToggleSideDialog"> </IconDropDown>
+             
+                <IconDropDown Text="SØG KUNDE" Icon="bi bi-arrow-down" OnClick="@NavigateTo"> </IconDropDown>
+
+
+                <!-- <RadzenDropDown @bind-Value=@DropDownValue1 Data=@companyNames Style="width: 100%; max-width: 150px;background-color: rgba(7, 9, 74, 1);color: white;" />-->
+             
+            </div>
+            
+            <button style="background-color:transparent; border-color:transparent;" on>
+                <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/appointment-reminders--v1.png" alt="appointment-reminders--v1" />
+            </button>
+            <button style="background-color:transparent; border-color:transparent;">
+                <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/settings.png" alt="settings" />
+            </button>
+          
+            <button style="background-color:transparent; border-color:transparent;">
+                <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/FFFFFF/menu-2.png" alt="menu-2" />
+            </button>
+           
+            
+
+           
+            
+       
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="fetchdata">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            </NavLink>
+        </div>
+        
+
+
+
+    </nav>
+</div>
+
+@code {
+    [Inject]
+    private SearchService SearchService { get; set; }
+    private bool collapseNavMenu = true;
+    private bool ShowInfo = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+
+    }
+
+
+
+    bool IsDialogOpen = false;
+
+    async Task ToggleSideDialog()
+    {
+        if (IsDialogOpen)
+        {
+            await DialogService.CloseDialog();
+        }
+        else
+        {
+            await DialogService.OpenSideAsyncInfoDialog<CardGrid>("");
+        }
+
+        IsDialogOpen = !IsDialogOpen;
+    }
+
+
+    async void NavigateTo()
+    {
+        SearchService.ToggleSearchBar();
+
+
+    }
+
+}

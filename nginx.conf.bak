@@ -1,0 +1,12 @@
+﻿events { }
+http {
+   include /etc/nginx/mime.types;
+    server {
+     listen 80;
+     index index.html;
+     root /user/share/nginx/html;
+     location / {        
+        try_files $uri $uri/ /index.html =404;
+     }
+  }
+}

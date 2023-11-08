@@ -1,0 +1,34 @@
+﻿@using Radzen.Blazor
+
+<style>
+    .custom-outline-primary- {
+        color: white !important;
+        border-color: white !important;
+        background-color: rgba(7, 9, 74, 1) !important;
+        text-align: left; /* Align text to the left */
+    }
+
+        .custom-outline-primary- .button-text {
+            float: left; /* Float the text to the left */
+        }
+
+        .custom-outline-primary- .button-icon {
+            float: right; /* Float the icon to the right */
+        }
+</style>
+
+<RadzenButton Class="custom-outline-primary- mr-2"
+              Variant="Variant.Outlined"
+              Click="@OnClick"
+              ButtonStyle="ButtonStyle.Secondary"
+              Size="ButtonSize.Medium">
+              
+    <span class="button-text">@Text</span>
+    <span class="button-icon"><i class="@Icon"></i></span>
+</RadzenButton>
+
+@code {
+    [Parameter] public string Text { get; set; }
+    [Parameter] public string Icon { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+}

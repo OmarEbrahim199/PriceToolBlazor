@@ -1,0 +1,232 @@
+﻿@using Pricetool.Components.Information
+@using Pricetool.Models;
+@using System.Text.Json;
+@using Pricetool.Services;
+@using Pricetool.Services.CustomerServices;
+@using Prisværktøj.Infrastructure.Repositories;
+@using Radzen.Blazor;
+@inject IJSRuntime JSRuntime
+@inject SearchService SearchService
+@inject ICustomerService customerService
+@inject ICorporateService corporateService;
+
+
+
+
+<div style=" border-block-color:deepskyblue;width:auto;height:1px;">
+</div>
+
+
+<div class="footer-height" style=" background-color: rgba(7, 9, 74, 1);">
+    <!---->
+    @if (SearchService.SearchBar)
+    {
+        <RadzenRow Gap="0.4rem" class="nav justify-content-start">
+
+            <RadzenColumn class="nav justify-content-sm-center" Style="padding-top:20px;">
+
+                @if (customerService.SelectedCustomer == null && IsLoading)
+                {
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-auto text-center">
+                            @if (message == "Loading customer...")
+                            {
+                                <div class="spinner-border text-light" role="status" style="width: 4rem; height: 4rem;">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            }
+                            else
+                            {
+
+
+                                <div  role="alert">
+
+                                    <span aria-hidden="true" style="font-size: 5rem; color:red;">&times;</span>
+                                  
+                                   
+                                </div>
+                            }
+                            <RadzenText class="TextStyle.DisplayH6 mt-3" style="color: white;">@message</RadzenText>
+                        </div>
+                    </div>
+
+
+                    
+                }
+
+              
+
+
+            @if (customerService.SelectedCustomer != null && SearchService.SearchBar)
+                {
+
+                    <div class="container">
+                        <div class="row justify-content-md-center">
+                            <RadzenText class="col-md-auto" TextStyle="TextStyle.DisplayH6" style="color: white ; ">@customerService.SelectedCustomer.Name</RadzenText>
+                        </div>
+
+
+                        <div class="row justify-content-md-center" style="padding-top:2rem ; padding-bottom:2rem;">
+                            <div class="col-md-auto">
+                                <div style="color: #A5ABD0; font-size: 12px;">CPR/CVR</div>
+                                <div style="color: white; font-size: 16px;">@customerService.SelectedCustomer.Cvr</div>
+
+                            </div>
+                            <div class="col-md-auto">
+                                <div style="color: #A5ABD0; font-size: 12px;">Ansvarlig</div>
+                                <div style="color: white; font-size: 16px;">@customerService.SelectedCustomer.Name</div>
+
+                            </div>
+
+
+                            <div class="col-md-auto">
+
+                                @if (KoncernButton)
+                                {
+                                    <NavLink href="customerdetails" @onclick="HideButton">
+                                        <RadzenButton Text="Primary" ButtonStyle="ButtonStyle.Secondary" Style="position:inherit">GÅ TIL KONCERN</RadzenButton>
+                                    </NavLink>
+                                }
+
+                                @if (ContinueButton)
+                                {
+                                    <NavLink href="customerdetails" @onclick="HideButton">
+                                        <RadzenButton Text="Primary" ButtonStyle="ButtonStyle.Secondary" Style="position:inherit">FORTSÆTTE</RadzenButton>
+                                    </NavLink>
+                                }
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                }
+                else
+                {
+
+
+
+                }
+
+
+            </RadzenColumn>
+
+            @if (SearchService.SearchBar)
+            {
+            <RadzenColumn class="rz-text-align-center " Style="padding: 50px;">
+                <RadzenRow class="nav justify-content-end">
+
+                    <div style="position: relative;">
+                        <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: white; cursor: pointer;"></i>
+                        <RadzenTextBox @bind-Value="searchTerm" @onkeyup="SearchOnEnter" Placeholder="Search for customers" Style="width: 100%; max-width: 300px; height: 40px; background-color: rgba(75, 86, 161, 1); color: white; padding-left: 30px;" />
+
+                    </div>
+
+
+                    <RadzenDropDown @bind-Value=@DropDownValue Data=@companyNames
+                                    Style="width: 100%; max-width: 150px;height:40px;padding-inline:auto; background-color: rgba(75, 86, 161, 1) ; color: white;" />
+
+                </RadzenRow>
+            </RadzenColumn>
+
+
+          }
+        </RadzenRow>
+
+    }@if (!SearchService.SearchBar && customerService.SelectedCustomer != null && searchTerm != null && !KoncernButton)
+    {
+        <CustomerInfo />
+    }
+    
+
+
+    
+
+
+</div>
+
+
+
+
+
+
+
+@code {
+
+    string DropDownValue = "CPR/CVR";
+    IEnumerable<string> companyNames = new List<string> { "CPR", "CVR" };
+    bool KoncernButton = true;
+    bool ContinueButton = false;
+    private string message = "Loading customer...";
+    private bool IsLoading = false;
+
+
+    [Parameter]
+    public string searchTerm { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        SearchService.SearchBarChanged += HandleSearchBarChanged;
+
+    }
+
+    public void Dispose()
+    {
+        SearchService.SearchBarChanged -= HandleSearchBarChanged;
+    }
+
+
+
+    private void HideButton()
+    {
+        KoncernButton = false;
+        SearchService.SearchBar = false;
+    }
+
+
+    private async Task SearchOnEnter(KeyboardEventArgs args)
+    {
+
+        if (args.Key.Equals("Enter") && searchTerm.Length == 8 )
+        {
+            await UpdateCustomerDetails();
+            KoncernButton = true;
+            ContinueButton = false;
+        }
+
+    }
+
+
+    private async Task UpdateCustomerDetails()
+    {
+        IsLoading = true;
+        var (result, Message) = await corporateService.GetCorporateByCvrAsync(int.Parse(searchTerm));
+        IsLoading = false; 
+
+        if (result != null)
+        {
+            customerService.SelectedCustomer = result;
+        }
+        else
+        {
+            message = Message; //= "No corporate found with CVR: '" + searchTerm + "'";
+            IsLoading = true;
+            customerService.SelectedCustomer = null; 
+        }
+        SearchService.SearchBarChanged += HandleSearchBarChanged;
+         
+    }
+
+
+
+   
+    private void HandleSearchBarChanged()
+    {
+        StateHasChanged();
+        ContinueButton = true;
+    }
+
+}
+
+

@@ -1,0 +1,250 @@
+﻿@using Pricetool.UI.Buttons
+@inject IJSRuntime JSRuntime
+
+<style>
+    .icon-style {
+        width: 32px; /* Adjust as needed */
+        height: 24px; /* Adjust as needed */
+        vertical-align: middle; /* Aligns the icon with the middle of the adjacent text */
+        margin-right: 5px; /* Adds a little space between the icon and the text */
+       
+    }
+    .card{
+        background: rgba( 255, 255, 255, 0.45 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 3.5px );
+        -webkit-backdrop-filter: blur( 3.5px );
+        border-radius: 10px;
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+    }
+
+ 
+
+</style>
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Overview</h3>
+
+        <div class="row mb-1 date-color ">
+            <div class="col-md-6">
+                Ansvarlig
+            </div>
+            <div class="col-md-6">
+                Højeste bevillingsniveau
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <b>MORR</b>
+            </div>
+            <div class="col-md-6">
+                <b> Retaildirektør </b>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- First Row -->
+            <div class="col-md-4 d-flex align-items-center mb-2">
+                <IconBox BoxText="RP" BoxColor="#875BA3" />
+                <span class="ml-2">Re-prisning</span>
+            </div>
+            <div class="col-md-2 d-flex align-items-center">
+                1
+            </div>
+            <div class="col-md-4 d-flex align-items-center">
+                <IconBox BoxText="RS" BoxColor="#49BCA3" />
+                <span class="ml-2">Rating Simulering</span>
+            </div>
+            <div class="col-md-2 d-flex align-items-center">
+                0
+            </div>
+
+            <!-- Second Row (if you have more data) -->
+            <div class="col-md-4 d-flex align-items-center">
+                <IconBox BoxText="NP" BoxColor="#4192DC" />
+                <span class="ml-2">Nye produkter</span>
+            </div>
+
+            <div class="col-md-2 d-flex align-items-center">
+                2
+            </div>
+
+            <div class="col-md-4 d-flex align-items-center">
+                <img src="/Checkbox.png" alt="Icon Description" class="icon-style">
+                <span class="ml-2">Fravalgte produkter</span>
+            </div>
+
+            <div class="col-md-2 d-flex align-items-center">
+                0
+            </div>
+        </div>
+
+        <div>
+            <hr class="solid">       
+
+
+        </div>
+
+    <div>
+            <div class="row mb-2">
+                <!-- First Row -->
+                <div class="col-6">
+                    <h4>Koncernen lønsomhed, år 1</h4>
+                </div>
+                <div class="col-4 ml-auto text-center">
+                    <h4>Vis påvirkning</h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Second Row -->
+                <div class="col-6">
+                    <p>Forventet resultat efter skat</p>
+                </div>
+                <div class="col-4 ml-auto text-center">
+                    <p class="mb-2">7.483.593</p>
+                </div>
+            </div>
+
+            <div><hr class="solid mt-1"></div>
+
+    </div>
+       
+
+        <div class="row">
+            <div class="col-6">
+                <p>Forventet afkast efter skat</p>
+            </div>
+
+            <div class="col-4 ml-auto text-center">
+                <p>8%</p>
+            </div>
+
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+
+            <button type="button" 
+                    class="btn btn-link" 
+                    id="iconToggleButton" 
+                    @onclick="ToggleIcons" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#collapseOne">
+                    <i class="bi bi-arrow-down" id="downIcon"></i>
+                    <i class="bi bi-arrow-up d-none" id="upIcon"></i>
+            </button>
+
+        </div>
+
+    </div>   
+   
+
+    <div id="collapseOne" class="collapse" data-bs-parent=".card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <p>Forventet afkast efter skat</p>
+            </div>
+
+            <div class="col-4 ml-auto text-center">
+                <p>8%</p>
+            </div>
+
+        </div>
+         
+             <div class="row">
+            <div class="col-6">
+                <p>Eksisterende Produkter</p>
+            </div>
+
+            <div class="col-4 ml-auto text-center">
+                <p>9.363.471</p>
+            </div>
+
+        </div>
+            <div class="row">
+                <div class="col-6">
+                    <p>Fravalgte produkter</p>
+                </div>
+
+                <div class="col-4 ml-auto text-center">
+                    <p>0</p>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <p>Nye produkter</p>
+                </div>
+
+                <div class="col-4 ml-auto text-center">
+                    <p>-1.916.511</p>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <p>Korrektion for loft på marg. omk</p>
+                </div>
+
+                <div class="col-4 ml-auto text-center">
+                    <p>36.633</p>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <p>Kapital forbrug med rabat</p>
+                </div>
+
+                <div class="col-4 ml-auto text-center">
+                    <p>90.506.728</p>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <p>Kapital forbrug uden rabat</p>
+                </div>
+
+                <div class="col-4 ml-auto text-center">
+                    <p>90.506.728</p>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <p>Rating ændret</p>
+                </div>
+
+                <div class="col-4 ml-auto text-center">
+                    <p>Ja</p>
+                </div>
+            </div>
+
+
+
+
+
+    </div>
+   
+</div>
+
+</div>
+
+@code{
+    private async Task ToggleIcons()
+    {
+       await JSRuntime.InvokeVoidAsync("toggleIcons");
+    }
+
+
+}
+
+
+

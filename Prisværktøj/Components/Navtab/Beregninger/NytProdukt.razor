@@ -1,0 +1,84 @@
+﻿@using Pricetool.Models;
+@using Pricetool.UI.Buttons
+@using Radzen.Blazor
+@inject Models.DialogServices DialogService
+
+<!---->
+@if (Visibility)
+{
+
+    <div class="d-flex justify-content-around">
+
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Wrap="FlexWrap.Wrap">
+            <div style="padding-right:13rem"><h3>Nyt produkt</h3></div>
+            <IconButton Text="OPRET" Icon="add" OnClick="@OpenOpretProdukt" />
+            <IconButton Text="ANNULER" Icon="cancel" OnClick="@CloseDialog" />
+
+
+        </RadzenStack>
+
+    </div>
+
+
+
+    <div class="d-flex justify-content-center">
+
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Class="rz-p-4 rz-mb-6 rz-border-radius-1" Wrap="FlexWrap.Wrap">
+
+            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                Produkt
+                <RadzenDropDown @bind-Value="@DropDownValueProdukt" Data=@Produkt />
+            </RadzenStack>
+
+            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                Debitor
+                <RadzenDropDown @bind-Value="@DropDownValueDebitor" Data=@Debitor />
+            </RadzenStack>
+
+            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                Kundeniveau
+                <RadzenDropDown @bind-Value="@DropDownValueKundeniveau" Data=@Kundeniveau />
+            </RadzenStack>
+
+        </RadzenStack>
+
+    </div>
+
+}else
+{
+    <OpretProdukt/>
+}
+
+@inject NavigationManager NavigationManager
+@code {
+    string DropDownValueProdukt = "Erhverskredit";
+    string DropDownValueDebitor = "Alex Pitzner Fonden";
+    string DropDownValueKundeniveau = "Erhverv";
+    IEnumerable<string> Kundeniveau = new List<string> { "First", "Second" };
+    IEnumerable<string> Debitor = new List<string> { "First", "Second" };
+    IEnumerable<string> Produkt = new List<string> { "First", "Second" };
+    private bool Visibility { get; set; } = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+
+    }
+
+    void OpenOpretProdukt()
+    {
+
+        this.Visibility = false;
+
+    }
+
+
+
+    async void CloseDialog()
+    {
+        await DialogService.CloseDialog();
+    }
+
+
+}

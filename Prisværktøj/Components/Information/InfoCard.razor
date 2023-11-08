@@ -1,0 +1,25 @@
+﻿@using Prisværktøj.Infrastructure.Models
+
+<a href="@CardData?.Link">
+    <div class="card mb-3 position-relative">
+        <div class="position-absolute top-0 end-0 p-2">
+            <RadzenIcon Icon="open_in_new" Size="20px" Title="External Link" />
+        </div>
+        <div class="card-header date-color">
+            @CardData?.Date.ToString("MMMM dd, yyyy")
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@CardData?.Heading</h5>
+            <p class="card-text">@CardData?.Information</p>
+        </div>
+    </div>
+</a>
+
+@code {
+    // Define a parameter for the card data
+    [Parameter]
+    public CardInfo? CardData { get; set; }
+
+  
+
+}

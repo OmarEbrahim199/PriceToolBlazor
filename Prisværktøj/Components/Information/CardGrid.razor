@@ -1,0 +1,22 @@
+﻿@using Prisværktøj.Infrastructure.Services;
+@using Prisværktøj.Infrastructure.Models;
+@inject IInfoCardService InfoCardService
+
+<h2 class="mb-4">Nyeste informationer</h2>
+<div class="row">
+    @foreach (var card in cards)
+    {
+        <div class="col-md-6 mb-3">
+            <InfoCard CardData="@card"/>
+        </div>
+    }
+</div>
+
+@code {
+    private List<CardInfo> cards = new List<CardInfo>();
+
+    protected override void OnInitialized()
+    {
+        cards = InfoCardService.GetAllCards().ToList();
+    }
+}

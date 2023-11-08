@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pricetool", "Prisværktøj\Pricetool.csproj", "{50DCF4A7-B143-48DE-83B5-256684DA08AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prisværktøj.Infrastructure", "Prisværktøj.Infrastructure\Prisværktøj.Infrastructure.csproj", "{F50262F0-17EB-4974-94B4-CC391A3BA00F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pricetool.Tests", "Pricetool.Tests\Pricetool.Tests.csproj", "{BB05918F-DFAF-4F85-8822-310B8907EA2F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PricetoolAPI", "Pricetool.API\PricetoolAPI.csproj", "{11DA9E36-42AD-439B-9C37-85520C8DF2CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PricetoolAPI.Application", "PricetoolAPI.Application\PricetoolAPI.Application.csproj", "{4B8589B8-43CA-4A90-815B-46BBBDD7E380}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PricetoolAPI.DataAccess", "PricetoolAPI.DataAccess\PricetoolAPI.DataAccess.csproj", "{0E425512-EF0F-4A17-B8D7-727F40079662}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PricetoolAPI.Domain", "PricetoolAPI.Domain\PricetoolAPI.Domain.csproj", "{543CBD43-AF75-479F-B043-003667C40E41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50DCF4A7-B143-48DE-83B5-256684DA08AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50DCF4A7-B143-48DE-83B5-256684DA08AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50DCF4A7-B143-48DE-83B5-256684DA08AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50DCF4A7-B143-48DE-83B5-256684DA08AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F50262F0-17EB-4974-94B4-CC391A3BA00F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F50262F0-17EB-4974-94B4-CC391A3BA00F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F50262F0-17EB-4974-94B4-CC391A3BA00F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F50262F0-17EB-4974-94B4-CC391A3BA00F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB05918F-DFAF-4F85-8822-310B8907EA2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB05918F-DFAF-4F85-8822-310B8907EA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB05918F-DFAF-4F85-8822-310B8907EA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB05918F-DFAF-4F85-8822-310B8907EA2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11DA9E36-42AD-439B-9C37-85520C8DF2CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11DA9E36-42AD-439B-9C37-85520C8DF2CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11DA9E36-42AD-439B-9C37-85520C8DF2CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11DA9E36-42AD-439B-9C37-85520C8DF2CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B8589B8-43CA-4A90-815B-46BBBDD7E380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B8589B8-43CA-4A90-815B-46BBBDD7E380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B8589B8-43CA-4A90-815B-46BBBDD7E380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B8589B8-43CA-4A90-815B-46BBBDD7E380}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E425512-EF0F-4A17-B8D7-727F40079662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E425512-EF0F-4A17-B8D7-727F40079662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E425512-EF0F-4A17-B8D7-727F40079662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E425512-EF0F-4A17-B8D7-727F40079662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{543CBD43-AF75-479F-B043-003667C40E41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{543CBD43-AF75-479F-B043-003667C40E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{543CBD43-AF75-479F-B043-003667C40E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{543CBD43-AF75-479F-B043-003667C40E41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5047673-D1C6-4967-801C-2A1C3A0A29D2}
+	EndGlobalSection
+EndGlobal

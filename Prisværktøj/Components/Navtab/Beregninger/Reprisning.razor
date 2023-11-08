@@ -1,0 +1,98 @@
+﻿@using Pricetool.Resources
+@using Prisværktøj.Infrastructure.Services
+@using Prisværktøj.Infrastructure.Models
+@inject IProductService ProductService
+
+
+<Accordion>
+    <AccordionItem>
+        <TitleTemplate>
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <div>
+                    <Icon Name="IconName.HouseFill" Class="me-1" /> Re-prisninger
+                </div>
+                <div class="mr-2">
+                    -621.980 kr
+                </div>
+            </div>
+        </TitleTemplate>
+        <Content>
+            <table class="table table-striped">
+                <thead>
+                    <tr class="text-center">
+                        @foreach (var label in labels)
+                        {
+                            <th style="color: #FF8308;">@label</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var productDetail in productDetailsList)
+                    {
+                        <tr>
+                            <td class="text-center">@productDetail.Produkt</td>
+                            <td class="text-center">@productDetail.Kunde</td>
+                            <td class="text-center">@productDetail.HovedstolMax.ToString("N2")</td>
+                            <td class="text-center">@productDetail.Engagement</td>
+                            <td class="text-center">@productDetail.SenesteBeregning.ToString("dd/MM/yyyy")</td>
+                            <td class="text-center">@productDetail.TilføjetAf</td>
+                            <td class="text-center">@productDetail.Påvirker</td>
+                            <td class="text-center">@productDetail.Ret</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </Content>
+    </AccordionItem>
+    <AccordionItem>
+        <TitleTemplate>
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <div>
+                    <Icon Name="IconName.PersonFill" Class="me-1" /> Nye produkter
+                </div>
+                <div class="mr-2">
+                    34.000 kr
+                </div>
+            </div>
+        </TitleTemplate>
+        <Content>
+            hey content
+        </Content>
+    </AccordionItem>
+</Accordion>
+
+
+
+@code {
+    List<string> labels = new List<string>
+    {
+        AppStrings.Label1,
+        AppStrings.Label2,
+        AppStrings.Label3,
+        AppStrings.Label4,
+        AppStrings.Label5,
+        AppStrings.Label6,
+        AppStrings.Label7,
+        AppStrings.Label8
+    };
+
+    private List<ProductDetail> productDetailsList = new List<ProductDetail>();
+
+    protected override void OnInitialized()
+    {
+        productDetailsList = ProductService.GetAllProductDetails().ToList();
+
+        Console.WriteLine($"labels count: {labels?.Count}");
+        Console.WriteLine($"productDetailsList count: {productDetailsList?.Count}");
+    }
+}
+
+
+  @*  <div class="d-flex flex-column flex-md-row justify-content-between mb-2">
+            <div class="mb-1 mb-md-0">Label 1</div>
+            <div>Value for Label 1</div>
+            </div>
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-2">
+            <div class="mb-1 mb-md-0">Label 2</div>
+            <div>Value for Label 2</div>
+            </div> *@

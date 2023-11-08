@@ -1,0 +1,40 @@
+[
+    {
+        "CustomerID": 1,
+        "CompanyName": "ABC Corporation",
+        "ContactName": "John Doe",
+        "AnsvarligNavn": "New York",
+        "Country": "USA",
+        "CPRCVRNumber": "1555555"
+    },
+    {
+        "CustomerID": 2,
+        "CompanyName": "XYZ Inc.",
+        "ContactName": "Jane Smith",
+        "AnsvarligNavn": "Los Angeles",
+        "Country": "USA",
+        "CPRCVRNumber": "11111111111"
+
+
+    },
+    {
+        "CustomerID": 3,
+        "CompanyName": "LMN Ltd.",
+        "ContactName": "Bob Johnson",
+        "AnsvarligNavn": "London",
+        "Country": "UK",
+        "CPRCVRNumber": "15555551"
+
+
+    },
+    {
+        "CustomerID": 4,
+        "CompanyName": "PQR Enterprises",
+        "ContactName": "Alice Brown",
+        "AnsvarligNavn": "Sydney",
+        "Country": "Australia",
+        "CPRCVRNumber": "15555553"
+
+
+    }
+]

@@ -1,0 +1,383 @@
+﻿@using Pricetool.Models;
+@using Pricetool.UI.Buttons
+@using Radzen.Blazor
+@inject             Models.DialogServices MyDialogService
+
+
+
+
+<div class="d-flex justify-content-between">
+
+    <div class="h3 mb-0 row">
+        <div>Nyt produkt</div>
+
+    </div>
+
+    <div class="d-flex align-items-center">
+
+        <IconButton Text="TILFØJ" Icon="add" OnClick="@OnInitialized" />
+        <IconButton Text="ANNULER" Icon="cancel" OnClick="@CloseDialog" />
+
+    </div>
+</div>
+
+
+
+<div class="row" style="padding-top:2rem">
+
+    <!--Col 1-->
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">Produkt</h5>
+                    <i class="bi bi-exclamation-circle"></i>
+                </div>
+
+
+                <RadzenRow Gap="1rem" Style="padding-top:2rem">
+                    <RadzenColumn Size="12">
+                        <RadzenStack>
+
+                            <!--Produkt Field -->
+                            <RadzenFormField Text="Produkt" Variant="@variant">
+                                <RadzenDropDown Data=@Produkt @bind-Value="@DropDownValueProdukt" />
+                            </RadzenFormField>
+
+                            <!--Samlet restgæld i ejendom Field -->
+                            <RadzenFormField Text="Samlet restgæld i ejendom" Variant="@variant">
+                                <RadzenTextBox @bind-Value="@value" />
+                            </RadzenFormField>
+
+                            <!--Produkt rating Field -->
+                            <RadzenFormField Text="Produkt rating" Variant="@variant" Style="padding-top:2rem">
+                                <RadzenDropDown Data=@Produkt @bind-Value="@DropDownValueProdukt" />
+                            </RadzenFormField>
+
+                            <!--Forretningsområde Field -->
+                            <RadzenFormField Text="Forretningsområde" Variant="@variant">
+                                <RadzenDropDown Data=@Produkt @bind-Value="@DropDownValueProdukt" />
+                            </RadzenFormField>
+
+                            <!--Låntype Field -->
+                            <RadzenFormField Text="Låntype" Variant="@variant">
+                                <RadzenDropDown Data=@Produkt @bind-Value="@DropDownValueProdukt" />
+                            </RadzenFormField>
+
+                            <!--Belåningsprocent i ejendom Field -->
+                            <RadzenFormField Text="Belåningsprocent i ejendom" Variant="@variant">
+                                <RadzenTextBox @bind-Value="@value" />
+                            </RadzenFormField>
+
+                            <!--Postnummer for ejendom Field -->
+                            <RadzenFormField Text="Postnummer for ejendom" Variant="@variant" Style="padding-top:2rem">
+                                <RadzenTextBox @bind-Value="@value" />
+                            </RadzenFormField>
+
+                            <RadzenText class="text-justify" Style="padding-top:2rem">
+
+                                Husk ved tillægslån at vælge det relevante ejendomsnummer i “Vælg produkt” og lave prisberegning på den samlede restgæld inkl.
+                                tillægslånet. De eksisterende lån i ejendommen vil automatisk blive fravalgt i hovedbilledet.
+                                Bemærk at prissætningen kun må inddrage værdien af sikkerheder hvis koncernens restgæld overstiger 20 mio.
+
+                            </RadzenText>
+                        </RadzenStack>
+                    </RadzenColumn>
+
+                </RadzenRow>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--COL 2 BOX 1-->
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">Tilføj sikkerhed</h5>
+                    <i class="bi bi-exclamation-circle"></i>
+                </div>
+
+
+
+                <RadzenRow Gap="1rem" Style="padding-top:2rem">
+                    <RadzenColumn Size="12">
+                        <RadzenStack>
+                            <RadzenFormField Text="RadzenTextBox" Variant="@variant">
+                                <RadzenTextBox @bind-Value="@value" />
+                            </RadzenFormField>
+
+                        </RadzenStack>
+                    </RadzenColumn>
+
+                </RadzenRow>
+
+            </div>
+        </div>
+
+        <!--COL 2 BOX 2-->
+        <div Style="padding-top:2rem"></div>
+        <div class="card" Style="padding-top:1rem">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">Vejledende minimumsbidrag</h5>
+                    <h4 class="card-title" style="color: #007bff !important;">VIS BIDRAGSDETALJER</h4>
+                </div>
+
+                <RadzenRow Gap="1rem" Style="padding-top:2rem">
+                    <RadzenColumn Size="12">
+                        <RadzenStack>
+                            <RadzenFormField Text="RadzenTextBox" Variant="@variant">
+                                <RadzenTextBox @bind-Value="@value" />
+                            </RadzenFormField>
+
+                        </RadzenStack>
+                    </RadzenColumn>
+
+                </RadzenRow>
+
+            </div>
+        </div>
+
+        <!--COL 2 BOX 3-->
+        <div Style="padding-top:2rem"></div>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">Kundens bidrag</h5>
+                    <i class="bi bi-exclamation-circle"></i>
+                </div>
+
+                <RadzenRow Gap="1rem">
+                    <RadzenColumn Size="12">
+                        <RadzenStack>
+
+                            <!--Kundens bidrag Field-->
+                            <RadzenFormField Text="Kundens bidrag" Variant="@variant">
+                                <RadzenTextBox @bind-Value="@value" />
+                            </RadzenFormField>
+
+                            <!--Gebyr, upfront Field-->
+                            <RadzenFormField Text="Gebyr, upfront" Variant="@variant">
+                                <RadzenTextBox @bind-Value="@value" />
+                            </RadzenFormField>
+
+                            <!--Gebyr, løbende pr. år Field-->
+                            <RadzenFormField Text="Gebyr, løbende pr. år" Variant="@variant">
+                                <RadzenTextBox @bind-Value="@value" />
+                            </RadzenFormField>
+
+                        </RadzenStack>
+                    </RadzenColumn>
+                </RadzenRow>
+
+
+
+            </div>
+        </div>
+
+        <!--COL 2 BOX 4-->
+        <div Style="padding-top:2rem"></div>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">Kursfradrag</h5>
+                    <i class="bi bi-exclamation-circle"></i>
+                </div>
+
+
+                <RadzenRow Gap="1rem" Style="padding-top:2rem">
+                    <RadzenColumn Size="12">
+                        <RadzenStack>
+                            <!--Kursfradrag Field-->
+                            <RadzenFormField Variant="@variant">
+                                <RadzenTextBox @bind-Value="@value" />
+                            </RadzenFormField>
+
+                        </RadzenStack>
+                    </RadzenColumn>
+                </RadzenRow>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!--ROW 3-->
+    <div class="col-sm-4" Style="padding-top:2rem">
+        <div class="card" >
+            <div class="card-body">
+
+                <div style="justify-content: flex-start; align-items: flex-start; gap: 40px; display: inline-flex">
+
+                    <div class="flex-column justify-content-start align-items-start" style="gap: 4px; display: flex">
+                        <div style="color: #FF8308; font-size: 12px;">Samlet bevillingsniveau </div>
+                        <h4>Retail direktør</h4>
+                    </div>
+
+
+                    <div class="flex-column justify-content-start align-items-start" style="gap: 4px; display: flex">
+                        <div style="color: #FF8308; font-size: 12px;">Bevillingsniveau</div>
+                        <h4>Rådgiver</h4>
+                    </div>
+
+
+
+                </div>
+                <hr>
+
+
+                <div class="d-flex justify-content-between" style="padding-top:10px">
+                    <h3 class="card-title">Produkt output, år 1</h3>
+                </div>
+
+
+                <ul class="list-group list-group-flush">
+
+
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Forventet afkast efter skat, år 1</div>
+
+                        </div>
+                        <span style="text-align: right; color: #49BCA3;  ">20 %</span>
+                    </li>
+
+
+
+
+
+
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Forventet resultat efter skat, år 1</div>
+
+                        </div>
+                        <span style="text-align: right; ">45.651</span>
+                    </li>
+
+
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Kapitalforbrug, år 1</div>
+
+                        </div>
+                        <span style="text-align: right;">232.695</span>
+                    </li>
+
+
+                </ul>
+
+
+
+
+
+
+
+
+                <!--collapse Button-->
+
+                
+                <div class="collapse" id="collapseExample">
+                  
+                    <hr>
+                    <ul class="list-group list-group-flush">
+
+
+
+                        <li class="list-group-item d-flex align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Forventet afkast efter skat, år 10</div>
+
+                            </div>
+                            <span style="text-align: right; color: #49BCA3;  ">@(20 * 10 )%</span>
+                        </li>
+
+
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Forventet resultat efter skat, år 10</div>
+
+                            </div>
+                            <span style="text-align: right; ">@(45.651 * 10)</span>
+                        </li>
+
+
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Kapitalforbrug, år 10</div>
+
+                            </div>
+                            <span style="text-align: right;">@(232.695 * 10)</span>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+
+                <p class="d-flex justify-content-center" style="padding-top:30px">
+
+                    <a @onclick="ToggleCollapse" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        @if (isCollapsed)
+                        {
+                            <span class="bi bi-arrow-down-short"></span>
+                        }
+                        else
+                        {
+                            <span class="bi bi-arrow-up-short"></span>
+                        }
+                        VIS produkt output over tid
+                    </a>
+
+
+
+                </p>
+
+               
+            </div>
+        </div>
+    </div
+
+</div>
+
+@code {
+    Variant variant = Variant.Outlined;
+    string DropDownValueProdukt = "Ny Ejendom";
+    string DropDownValueDebitor = "Alex Pitzner Fonden";
+    string DropDownValueKundeniveau = "Erhverv";
+    IEnumerable<string> Kundeniveau = new List<string> { "First", "Second" };
+    IEnumerable<string> Debitor = new List<string> { "First", "Second" };
+    IEnumerable<string> Produkt = new List<string> { "First", "Second" };
+    string value = "Text";
+    int intValue = 123;
+    int radioButtonValue = 1;
+    string dropDownValue = "Around the Horn";
+    string dropDownDataGridValue = "";
+    private bool isCollapsed = true;
+
+    private void ToggleCollapse()
+    {
+        isCollapsed = !isCollapsed;
+    }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+
+    }
+    async void CloseDialog()
+    {
+        await MyDialogService.CloseDialog();
+    }
+}
+
+
+
+

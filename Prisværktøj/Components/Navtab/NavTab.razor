@@ -1,0 +1,20 @@
+﻿@using Radzen.Blazor
+@using Pricetool.Components.Navtab.Beregninger
+
+<RadzenTabs SelectedIndex="0">
+    <Tabs>
+        <RadzenTabsItem Text="BEREGNINGER og SIMULATOR">
+            <!-- Content for the "BEREGNINGER og SIMULATOR" tab goes here -->
+             <BeregningerComponent />
+        </RadzenTabsItem>
+        
+        <RadzenTabsItem Text="BEVILLINGER">
+            <!-- Content for the "BEVILLINGER" tab goes here -->
+              <BevillingerComponent />
+        </RadzenTabsItem>
+        
+        <RadzenTabsItem Text="AKTIVITET">
+            <AktivitetComponent />
+        </RadzenTabsItem>
+    </Tabs>
+</RadzenTabs>

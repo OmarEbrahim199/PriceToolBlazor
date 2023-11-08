@@ -1,0 +1,27 @@
+﻿<style>
+
+    .icon-box {
+        width: 32px;
+        height: 24px;
+        padding: 2px 0;
+        border-radius: 2px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 8px; /* gap to the next element */
+    }
+
+    .icon-box-text {
+        color: white;
+        font-weight: bold; /* Optional: if you want the text to be bold */
+    }
+</style>
+
+<div class="icon-box" style="background-color: @BoxColor;">
+    <span class="icon-box-text">@BoxText</span>
+</div>
+
+@code {
+    [Parameter] public string BoxText { get; set; } = ""; // default value
+    [Parameter] public string BoxColor { get; set; } = "#875BA3"; // default color
+}
